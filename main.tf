@@ -19,6 +19,20 @@ resource "aws_launch_configuration" "example" {
   }
 }
 
+resource "aws_autoscaling_group" "example" {
+  launch_configuration = aws_launch_configuration.example.name
+  vpc_zone_identifier  = data.aws_subnets.default.ids
+
+  min_size = 2
+  max_size = 10
+
+  tag {
+    key                 = "Name"
+    value               = "terraform-asg-example"
+    propagate_at_launch = true
+  }
+}
+
 resource "aws_security_group" "instance" {
   name = "terraform-example-instance"
 
@@ -40,20 +54,16 @@ output "public_ip" {
   description = "The public IP address of the web server"
 }
 
-resource "aws_autoscaling_group" "example" {
-  launch_configuration = aws_launch_configuration.example.name
 
-  min_size = 2
-  max_size = 10
-
-  tag {
-    key                 = "Name"
-    value               = "terraform-asg-example"
-    propagate_at_launch = true
-  }
-}
 
 data "aws_vpc" "default" {
   default = true
+}
+
+data "aws_subnets" "default" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
 }
 

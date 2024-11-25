@@ -47,18 +47,6 @@ resource "aws_security_group" "instance" {
   }
 }
 
-variable "server_port" {
-  description = "The port the server will use for HTTP requests"
-  type        = number
-}
-
-output "public_ip" {
-  value       = aws_instance.example.public_ip
-  description = "The public IP address of the web server"
-}
-
-
-
 data "aws_vpc" "default" {
   default = true
 }
@@ -146,6 +134,31 @@ resource "aws_security_group" "alb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+variable "server_port" {
+  description = "The port the server will use for HTTP requests"
+  type        = number
+}
+
+output "public_ip" {
+  value       = aws_instance.example.public_ip
+  description = "The public IP address of the web server"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 output "alb_dns_name" {
   value       = aws_lb.example.dns_name

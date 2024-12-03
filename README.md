@@ -2,7 +2,7 @@
 11/23-11/24/2024
 David Eliason
 
-I am working to learn Terraform and am using the great resourc, 'Terraform: Up and Running', 3rd edition, by Y. Brikman.
+I am working to learn Terraform and am using the great resource, 'Terraform: Up and Running', 3rd edition, by Y. Brikman.
 The hands-on learning that I am practicing here are based on the project described in chapter two of this book.
 
 Note: The author suggests the following for VC:
